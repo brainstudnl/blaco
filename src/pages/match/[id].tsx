@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-export default function Home() {
+export default function CreateMatch() {
   return (
     <>
       <Head>
-        <title>Brainstud Ladder Competition</title>
+        <title>View match</title>
       </Head>
     </>
   );
