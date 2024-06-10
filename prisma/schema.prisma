@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int     @id @default(autoincrement())
+  name               String  @db.VarChar(255)
+  level              Int
+  challenger_matches Match[] @relation("challenger")
+  defender_matches   Match[] @relation("defender")
+}
+
+model Match {
+  id               Int  @id @default(autoincrement())
+  challenger       User @relation("challenger", fields: [challenger_id], references: [id])
+  defender         User @relation("defender", fields: [defender_id], references: [id])
+  challenger_id    Int
+  defender_id      Int
+  score_challenger Int
+  score_defender   Int
+}
