@@ -1,5 +1,5 @@
-import { createMatch, getMatches } from "@blaco/database/MatchRepository";
-import { getUser, updateUserLevel } from "@blaco/database/UserRepository";
+import { getMatches } from "@blaco/database/MatchRepository";
+import { createMatch } from "@blaco/services/MatchService";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -14,29 +14,23 @@ export default async function handler(
     case "POST":
       const { challenger_id, defender_id, score_challenger, score_defender } =
         req.body;
-      const match = await createMatch(
-        challenger_id,
-        defender_id,
-        score_challenger,
-        score_defender,
-      );
-      if (score_challenger === 10) {
-        await handleChallengerWin(challenger_id, defender_id);
+      try {
+        const match = await createMatch(
+          challenger_id,
+          defender_id,
+          score_challenger,
+          score_defender,
+        );
+        return res.status(201).json(match);
+      } catch (error) {
+        let message =
+          error instanceof Error ? error.message : "Unknown error occurred";
+        return res.status(400).json({ message: message });
       }
-      res.status(201).json(match);
-      return;
     default:
       res.status(405).json({
         message: `Method ${req.method} on endpoint /users not found.`,
       });
       return;
   }
-}
-
-async function handleChallengerWin(challenger_id: number, defender_id: number) {
-  const challenger = await getUser(challenger_id);
-  const defender = await getUser(defender_id);
-
-  updateUserLevel(challenger.id, defender.level);
-  updateUserLevel(defender.id, challenger.level);
 }

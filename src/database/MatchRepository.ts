@@ -1,5 +1,4 @@
 import prisma from "@blaco/database/db";
-import { Match } from "@prisma/client";
 
 export async function getMatches() {
   return await prisma.match.findMany({
@@ -14,7 +13,7 @@ export async function getMatches() {
   });
 }
 
-export async function createMatch(
+export async function insertMatch(
   challenger_id: number,
   defender_id: number,
   score_challenger: number,
