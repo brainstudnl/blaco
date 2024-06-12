@@ -1,5 +1,5 @@
 import { insertMatch } from "@blaco/database/MatchRepository";
-import { getUser, updateUserLevel } from "@blaco/database/UserRepository";
+import { getUser, updateUser } from "@blaco/database/UserRepository";
 import { Match, User } from "@prisma/client";
 
 export async function createMatch(
@@ -33,8 +33,8 @@ async function handleChallengerWin(challenger_id: number, defender_id: number) {
   const challenger = await getUser(challenger_id);
   const defender = await getUser(defender_id);
 
-  updateUserLevel(challenger.id, defender.level);
-  updateUserLevel(defender.id, challenger.level);
+  updateUser(challenger.id, { level: defender.level });
+  updateUser(defender.id, { level: challenger.level });
 }
 
 function isValidMatch(challenger: User, defender: User): boolean {
