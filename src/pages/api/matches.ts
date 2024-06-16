@@ -12,14 +12,20 @@ export default async function handler(
       res.status(200).json(matches);
       return;
     case "POST":
-      const { challenger_id, defender_id, score_challenger, score_defender } =
-        req.body;
+      const {
+        challenger_id,
+        defender_id,
+        score_challenger,
+        score_defender,
+        played_at,
+      } = JSON.parse(req.body);
       try {
         const match = await createMatch(
           challenger_id,
           defender_id,
           score_challenger,
           score_defender,
+          new Date(played_at),
         );
         return res.status(201).json(match);
       } catch (error) {

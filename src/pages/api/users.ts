@@ -11,7 +11,6 @@ export default async function handler(
       const users = await getUsers();
       res.status(200).json(users);
     default:
-      console.log(req);
       res.status(405).json({
         message: `Method ${req.method} on endpoint /users not found.`,
       });

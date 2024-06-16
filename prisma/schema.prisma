@@ -22,11 +22,12 @@ model User {
 }
 
 model Match {
-  id               Int  @id @default(autoincrement())
-  challenger       User @relation("challenger", fields: [challenger_id], references: [id])
-  defender         User @relation("defender", fields: [defender_id], references: [id])
+  id               Int      @id @default(autoincrement())
+  challenger       User     @relation("challenger", fields: [challenger_id], references: [id])
+  defender         User     @relation("defender", fields: [defender_id], references: [id])
   challenger_id    Int
   defender_id      Int
   score_challenger Int
   score_defender   Int
+  played_at        DateTime
 }

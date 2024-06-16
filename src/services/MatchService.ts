@@ -7,6 +7,7 @@ export async function createMatch(
   defender_id: number,
   score_challenger: number,
   score_defender: number,
+  played_at: Date,
 ): Promise<Match> {
   const challenger = await getUser(challenger_id);
   const defender = await getUser(defender_id);
@@ -20,6 +21,7 @@ export async function createMatch(
     defender_id,
     score_challenger,
     score_defender,
+    played_at,
   );
 
   if (score_challenger === 10) {

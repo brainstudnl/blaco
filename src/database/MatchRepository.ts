@@ -9,6 +9,7 @@ export async function getMatches() {
       score_challenger: true,
       defender: true,
       challenger: true,
+      played_at: true,
     },
   });
 }
@@ -18,6 +19,7 @@ export async function insertMatch(
   defender_id: number,
   score_challenger: number,
   score_defender: number,
+  played_at: Date,
 ) {
   return await prisma.match.create({
     data: {
@@ -25,6 +27,7 @@ export async function insertMatch(
       defender_id,
       score_challenger,
       score_defender,
+      played_at,
     },
   });
 }
