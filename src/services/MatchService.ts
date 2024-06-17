@@ -1,6 +1,6 @@
-import { insertMatch } from "@blaco/database/MatchRepository";
-import { getUser, updateUser } from "@blaco/database/UserRepository";
-import { Match, User } from "@prisma/client";
+import { Match, User } from '@prisma/client';
+import { insertMatch } from '@blaco/database/MatchRepository';
+import { getUser, updateUser } from '@blaco/database/UserRepository';
 
 export async function createMatch(
   challenger_id: number,
@@ -13,7 +13,7 @@ export async function createMatch(
   const defender = await getUser(defender_id);
 
   if (!isValidMatch(challenger, defender)) {
-    throw new Error("Match is invalid.");
+    throw new Error('Match is invalid.');
   }
 
   const match = await insertMatch(

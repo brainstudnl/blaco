@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { PropsWithChildren } from "react";
-import { Inter } from "next/font/google";
-import classNames from "classnames";
-import styles from "./Layout.module.css";
+import classNames from 'classnames';
+import { Inter } from 'next/font/google';
+import Head from 'next/head';
+import { PropsWithChildren } from 'react';
+import styles from './Layout.module.css';
 
 const cx = classNames.bind(styles);
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 interface IProps extends PropsWithChildren<{}> {}
 
