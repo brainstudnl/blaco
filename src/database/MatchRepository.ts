@@ -2,7 +2,6 @@ import prisma from "@blaco/database/db";
 
 export async function getMatches() {
   return await prisma.match.findMany({
-    // relationLoadStrategy: "join",
     select: {
       id: true,
       score_defender: true,

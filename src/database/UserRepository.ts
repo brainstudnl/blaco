@@ -15,6 +15,6 @@ export async function updateUser(
 ): Promise<User> {
   return await prisma.user.update({
     where: { id: id },
-    data: data,
+    data,
   });
 }
