@@ -1,6 +1,6 @@
 import { Match, User } from '@prisma/client';
 import classNames from 'classnames/bind';
-import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
+import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { UserAvatar } from '@blaco/components/UserAvatar';
@@ -14,7 +14,7 @@ type TMatchInfo = Match & { challenger: User; defender: User };
 export default function MatchesPage({
   matches,
   users,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <DataTable<Match[]>
       value={matches}
@@ -87,8 +87,8 @@ export default function MatchesPage({
   );
 }
 
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<{ matches: Match[]; users: User[] }>
+export async function getServerSideProps(): Promise<
+  GetServerSidePropsResult<{ matches: Match[]; users: User[] }>
 > {
   const [matchesResponse, usersResponse] = await Promise.all([
     fetch(getUrl('/api/matches')),

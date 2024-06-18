@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import classNames from 'classnames/bind';
-import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
+import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Level } from '@blaco/components/Level';
@@ -13,7 +13,7 @@ const levels = Array.from({ length: 10 }, (_, i) => i + 1);
 
 export default function Home({
   usersPerLevel,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
   return (
@@ -38,8 +38,8 @@ export default function Home({
   );
 }
 
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<{ usersPerLevel: Record<string, User[]> }>
+export async function getServerSideProps(): Promise<
+  GetServerSidePropsResult<{ usersPerLevel: Record<string, User[]> }>
 > {
   const res = await fetch(getUrl('/api/users'));
   const fetchedUsers: User[] = await res.json();

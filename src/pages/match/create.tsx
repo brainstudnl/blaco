@@ -1,9 +1,9 @@
 import { User } from '@prisma/client';
 import classNames from 'classnames/bind';
 import type {
-  GetStaticProps,
-  GetStaticPropsResult,
-  InferGetStaticPropsType,
+  GetServerSideProps,
+  GetServerSidePropsResult,
+  InferGetServerSidePropsType,
 } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 
 export default function CreateMatch({
   users,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [challengerId, setChallengerId] = useState<number | null>(null);
   const [defenderId, setDefenderId] = useState<number | null>(null);
   const [playedAt, setPlayedAt] = useState(new Date());
@@ -156,8 +156,8 @@ export default function CreateMatch({
   );
 }
 
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<{ users: User[] }>
+export async function getServerSideProps(): Promise<
+  GetServerSidePropsResult<{ users: User[] }>
 > {
   const res = await fetch(getUrl('/api/users'));
   const users = await res.json();
