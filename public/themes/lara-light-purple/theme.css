@@ -48,6 +48,7 @@
   --maskbg: rgba(0, 0, 0, 0.4);
   --highlight-bg: #f5f3ff;
   --highlight-text-color: #6d28d9;
+  --page-background-color: #fff;
   color-scheme: light;
 }
 

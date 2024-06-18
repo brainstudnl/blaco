@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   z-index: 1;
+  background-color: var(--page-background-color);
 }
 
 .navInner {
@@ -45,5 +46,11 @@
   .theme {
     right: 1rem;
     bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .navInner {
+    flex-direction: column;
   }
 }

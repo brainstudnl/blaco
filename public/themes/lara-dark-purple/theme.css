@@ -48,6 +48,7 @@
   --maskbg: rgba(0, 0, 0, 0.4);
   --highlight-bg: rgba(167, 139, 250, 0.16);
   --highlight-text-color: rgba(255, 255, 255, 0.87);
+  --page-background-color: #121212;
   color-scheme: dark;
 }
 
