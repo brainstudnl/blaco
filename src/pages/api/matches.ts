@@ -1,17 +1,17 @@
-import { getMatches } from "@blaco/database/MatchRepository";
-import { createMatch } from "@blaco/services/MatchService";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getMatches } from '@blaco/database/MatchRepository';
+import { createMatch } from '@blaco/services/MatchService';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   switch (req.method) {
-    case "GET":
+    case 'GET':
       const matches = await getMatches();
       res.status(200).json(matches);
       return;
-    case "POST":
+    case 'POST':
       const {
         challenger_id,
         defender_id,
@@ -30,7 +30,7 @@ export default async function handler(
         return res.status(201).json(match);
       } catch (error) {
         let message =
-          error instanceof Error ? error.message : "Unknown error occurred";
+          error instanceof Error ? error.message : 'Unknown error occurred';
         return res.status(400).json({ message: message });
       }
     default:

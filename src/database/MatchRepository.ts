@@ -1,4 +1,4 @@
-import prisma from "@blaco/database/db";
+import prisma from '@blaco/database/db';
 
 export async function getMatches() {
   return await prisma.match.findMany({

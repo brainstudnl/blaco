@@ -1,5 +1,5 @@
-import prisma from "@blaco/database/db";
-import { User } from "@prisma/client";
+import { User } from '@prisma/client';
+import prisma from '@blaco/database/db';
 
 export async function getUsers(): Promise<User[]> {
   return await prisma.user.findMany();
