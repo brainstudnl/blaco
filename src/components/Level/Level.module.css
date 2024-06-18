@@ -1,0 +1,86 @@
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.base :global(.p-avatar) {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.place {
+  position: absolute;
+  bottom: -50%;
+  transform: translateY(calc(-50% - 6px));
+  background-color: var(--surface-a);
+  font-size: 0.875rem;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.level-1 :global(.p-avatar) {
+  border: 3px solid #ffd700;
+  width: 6rem;
+  height: 6rem;
+}
+
+.level-1 .place {
+  background-color: #ffd700;
+  color: var(--surface-a);
+  transform: translateY(calc(-50% - 22px));
+}
+
+.level-1 .name {
+  font-size: 1.5rem;
+}
+
+.level-2 .name {
+  font-size: 1.2rem;
+}
+
+.level-2 .place {
+  background-color: #bdc3c7;
+  color: var(--surface-a);
+}
+
+.level-3 .place {
+  background-color: #cd7f32;
+  color: var(--surface-a);
+}
+
+.level-2 :global(.p-avatar) {
+  border: 2px solid #bdc3c7;
+}
+
+.level-3 :global(.p-avatar) {
+  border: 2px solid #cd7f32;
+}
+
+.crown {
+  position: absolute;
+  top: -36%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 40px;
+  filter: drop-shadow(0px 0px 4px #72630b);
+}
