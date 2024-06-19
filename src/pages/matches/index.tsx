@@ -27,7 +27,10 @@ export default function MatchesPage({
         field="challenger_id"
         body={(match: TMatchInfo) => (
           <div className={cx(styles.flexEnd)}>
-            <UserAvatar name={match.challenger.name} size="medium" />
+            <div className={cx(styles.user)}>
+              <UserAvatar name={match.challenger.name} size="medium" />
+              <span>{match.challenger.name}</span>
+            </div>
           </div>
         )}
       />
@@ -80,7 +83,12 @@ export default function MatchesPage({
       <Column
         field="defender_id"
         body={(match: TMatchInfo) => (
-          <UserAvatar name={match.defender.name} size="medium" />
+          <div className={cx(styles.flexStart)}>
+            <div className={cx(styles.user)}>
+              <UserAvatar name={match.defender.name} size="medium" />
+              <span>{match.defender.name}</span>
+            </div>
+          </div>
         )}
       />
     </DataTable>

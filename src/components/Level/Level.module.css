@@ -14,7 +14,6 @@
 }
 
 .base :global(.avatar__image) {
-  margin-bottom: 1rem;
   position: relative;
 }
 
@@ -22,7 +21,7 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, calc(-50% + 12.5px));
+  transform: translate(-50%, calc(-50% + 25px));
   background-color: var(--surface-a);
   font-size: 0.875rem;
   width: 25px;
@@ -37,7 +36,7 @@
 
 .name {
   font-weight: 700;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .level-1 :global(.avatar__image) {
