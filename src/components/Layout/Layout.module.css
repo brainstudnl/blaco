@@ -36,11 +36,12 @@
   position: fixed;
   right: 2rem;
   bottom: 2rem;
+  z-index: 2;
 }
 
 @media screen and (max-width: 768px) {
   .main {
-    padding: 6rem 1rem 1rem;
+    padding: 8rem 1rem 1rem;
   }
 
   .theme {
