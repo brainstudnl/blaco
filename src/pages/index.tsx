@@ -2,7 +2,6 @@ import { User } from '@prisma/client';
 import classNames from 'classnames/bind';
 import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Level } from '@blaco/components/Level';
 import { getUrl } from '@blaco/utils/getUrl';
 import styles from './Home.module.css';
@@ -14,8 +13,6 @@ const levels = Array.from({ length: 10 }, (_, i) => i + 1);
 export default function Home({
   usersPerLevel,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const router = useRouter();
-
   return (
     <>
       <Head>

@@ -1,7 +1,6 @@
 import { User } from '@prisma/client';
 import classNames from 'classnames/bind';
 import type {
-  GetServerSideProps,
   GetServerSidePropsResult,
   InferGetServerSidePropsType,
 } from 'next';

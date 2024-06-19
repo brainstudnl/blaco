@@ -13,15 +13,16 @@
   align-items: center;
 }
 
-.base :global(.p-avatar) {
+.base :global(.avatar__image) {
   margin-bottom: 1rem;
   position: relative;
 }
 
 .place {
   position: absolute;
-  bottom: -50%;
-  transform: translateY(calc(-50% - 6px));
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 12.5px));
   background-color: var(--surface-a);
   font-size: 0.875rem;
   width: 25px;
@@ -36,18 +37,16 @@
 
 .name {
   font-weight: 700;
+  margin-top: 0.5rem;
 }
 
-.level-1 :global(.p-avatar) {
+.level-1 :global(.avatar__image) {
   border: 3px solid #ffd700;
-  width: 6rem;
-  height: 6rem;
 }
 
 .level-1 .place {
   background-color: #ffd700;
   color: var(--surface-a);
-  transform: translateY(calc(-50% - 22px));
 }
 
 .level-1 .name {
@@ -68,19 +67,18 @@
   color: var(--surface-a);
 }
 
-.level-2 :global(.p-avatar) {
+.level-2 :global(.avatar__image) {
   border: 2px solid #bdc3c7;
 }
 
-.level-3 :global(.p-avatar) {
+.level-3 :global(.avatar__image) {
   border: 2px solid #cd7f32;
 }
 
 .crown {
   position: absolute;
-  top: -36%;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
-  max-width: 40px;
+  transform: translate(-50%, -50%);
   filter: drop-shadow(0px 0px 4px #72630b);
 }

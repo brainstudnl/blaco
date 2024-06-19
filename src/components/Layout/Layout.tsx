@@ -1,17 +1,10 @@
 import classNames from 'classnames/bind';
-import Head from 'next/head';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { PrimeReactContext } from 'primereact/api';
 import { Button } from 'primereact/button';
-import {
-  Fragment,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { Fragment, PropsWithChildren, useContext, useState } from 'react';
 import styles from './Layout.module.css';
 
 const cx = classNames.bind(styles);

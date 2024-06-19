@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
+import { Fragment } from 'react';
 import { UserAvatar } from '@blaco/components/UserAvatar';
 import { getUrl } from '@blaco/utils/getUrl';
 import styles from './MatchPage.module.css';
@@ -13,7 +14,6 @@ type TMatchInfo = Match & { challenger: User; defender: User };
 
 export default function MatchesPage({
   matches,
-  users,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <DataTable<Match[]>
@@ -27,14 +27,14 @@ export default function MatchesPage({
         field="challenger_id"
         body={(match: TMatchInfo) => (
           <div className={cx(styles.flexEnd)}>
-            <UserAvatar name={match.challenger.name} size="large" />
+            <UserAvatar name={match.challenger.name} size="medium" />
           </div>
         )}
       />
       <Column
         className={cx(styles.column)}
         body={(match: TMatchInfo) => (
-          <div>
+          <Fragment>
             <div className={cx(styles.scoreContainer)}>
               <div
                 className={cx(
@@ -74,13 +74,13 @@ export default function MatchesPage({
                 </span>
               </div>
             ) : null}
-          </div>
+          </Fragment>
         )}
       />
       <Column
         field="defender_id"
         body={(match: TMatchInfo) => (
-          <UserAvatar name={match.defender.name} size="large" />
+          <UserAvatar name={match.defender.name} size="medium" />
         )}
       />
     </DataTable>
@@ -88,15 +88,10 @@ export default function MatchesPage({
 }
 
 export async function getServerSideProps(): Promise<
-  GetServerSidePropsResult<{ matches: Match[]; users: User[] }>
+  GetServerSidePropsResult<{ matches: Match[] }>
 > {
-  const [matchesResponse, usersResponse] = await Promise.all([
-    fetch(getUrl('/api/matches')),
-    fetch(getUrl('/api/users')),
-  ]);
+  const res = await fetch(getUrl('/api/matches'));
+  const matches = await res.json();
 
-  const matches = await matchesResponse.json();
-  const users = await usersResponse.json();
-
-  return { props: { matches, users } };
+  return { props: { matches } };
 }

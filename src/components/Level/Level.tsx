@@ -17,16 +17,14 @@ export function Level({ players, level }: IProps) {
     <div className={cx(styles.base, `level-${level}`)}>
       {players.map(({ name, id }) => (
         <div key={id} className={cx(styles.player)}>
-          <UserAvatar name={name} size="xlarge">
+          <UserAvatar name={name} size={level === 1 ? 'xlarge' : 'large'}>
             {level === 1 ? (
-              <>
-                <Image
-                  src={crownSvg}
-                  alt="1e plaats"
-                  className={cx(styles.crown)}
-                />
-                <div className={cx(styles.border)} />
-              </>
+              <Image
+                src={crownSvg}
+                alt="1e plaats"
+                className={cx(styles.crown)}
+                width={50}
+              />
             ) : null}
             <div className={cx(styles.place)}>
               <span>{level}</span>
