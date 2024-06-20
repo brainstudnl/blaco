@@ -1,0 +1,12 @@
+.base {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.base img {
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+}

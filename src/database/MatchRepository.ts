@@ -10,6 +10,9 @@ export async function getMatches() {
       challenger: true,
       played_at: true,
     },
+    orderBy: {
+      played_at: 'desc',
+    },
   });
 }
 

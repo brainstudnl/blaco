@@ -1,0 +1,83 @@
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.base :global(.avatar__image) {
+  position: relative;
+}
+
+.place {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 25px));
+  background-color: var(--surface-a);
+  font-size: 0.875rem;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.name {
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.level-1 :global(.avatar__image) {
+  border: 3px solid #ffd700;
+}
+
+.level-1 .place {
+  background-color: #ffd700;
+  color: var(--surface-a);
+}
+
+.level-1 .name {
+  font-size: 1.5rem;
+}
+
+.level-2 .name {
+  font-size: 1.2rem;
+}
+
+.level-2 .place {
+  background-color: #bdc3c7;
+  color: var(--surface-a);
+}
+
+.level-3 .place {
+  background-color: #cd7f32;
+  color: var(--surface-a);
+}
+
+.level-2 :global(.avatar__image) {
+  border: 2px solid #bdc3c7;
+}
+
+.level-3 :global(.avatar__image) {
+  border: 2px solid #cd7f32;
+}
+
+.crown {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0px 0px 4px #72630b);
+}

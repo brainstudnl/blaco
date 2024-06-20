@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+}
+
+.levels {
+  display: grid;
+  margin-bottom: 2rem;
+  max-width: 400px;
+  margin: 0 auto 2rem auto;
+  width: 100%;
+  gap: 1.6rem;
+}
+
+.level {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+
+  .levels {
+    max-width: none;
+  }
+}

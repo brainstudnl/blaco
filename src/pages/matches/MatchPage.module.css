@@ -1,0 +1,79 @@
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+}
+
+.user span {
+  font-size: 0.875rem;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.table :global(.p-datatable-header) {
+  text-align: center;
+}
+
+.table thead {
+  display: none;
+}
+
+.column {
+  width: 1%;
+  min-width: 170px;
+}
+
+.scoreContainer {
+  display: flex;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.scoreBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+}
+
+.scoreBoxPrimary {
+  background-color: var(--primary-500);
+  color: var(--primary-color-text);
+}
+
+.scoreBoxWhite {
+  background-color: var(--surface-900);
+  color: var(--surface-0);
+}
+
+.date {
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-top: 0.5rem;
+}
+
+@media screen and (max-width: 512px) {
+  .column {
+    min-width: auto;
+    width: auto;
+  }
+}

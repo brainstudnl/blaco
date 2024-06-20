@@ -9,8 +9,7 @@ export default async function handler(
   switch (req.method) {
     case 'GET':
       const matches = await getMatches();
-      res.status(200).json(matches);
-      return;
+      return res.status(200).json(matches);
     case 'POST':
       const {
         challenger_id,
@@ -34,9 +33,8 @@ export default async function handler(
         return res.status(400).json({ message: message });
       }
     default:
-      res.status(405).json({
+      return res.status(405).json({
         message: `Method ${req.method} on endpoint /users not found.`,
       });
-      return;
   }
 }
