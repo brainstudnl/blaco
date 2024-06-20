@@ -9,9 +9,9 @@ export default async function handler(
   switch (req.method) {
     case 'GET':
       const users = await getUsers();
-      res.status(200).json(users);
+      return res.status(200).json(users);
     default:
-      res.status(405).json({
+      return res.status(405).json({
         message: `Method ${req.method} on endpoint /users not found.`,
       });
   }
