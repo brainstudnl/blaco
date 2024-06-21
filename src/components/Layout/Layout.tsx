@@ -57,6 +57,10 @@ export function Layout({ children }: IProps) {
           onClick={handleChangeTheme}
           icon={cx('pi', theme === 'dark' ? 'pi-sun' : 'pi-moon')}
         />
+        <Link href="/rules" className={cx(styles.rules)}>
+          <i className="pi pi-question-circle" />
+        </Link>
+
         {children}
       </main>
     </Fragment>

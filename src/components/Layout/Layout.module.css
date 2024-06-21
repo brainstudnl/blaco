@@ -34,9 +34,20 @@
 
 .theme {
   position: fixed;
-  right: 2rem;
-  bottom: 2rem;
+  bottom: 5.5rem;
   z-index: 2;
+  right: 2rem;
+}
+
+.rules {
+  position: fixed;
+  bottom: 2rem;
+  right: 2.75rem;
+  z-index: 2;
+}
+
+.rules i {
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -46,6 +57,11 @@
 
   .theme {
     right: 1rem;
+    bottom: 3.5rem;
+  }
+
+  .rules {
+    right: 1.75rem;
     bottom: 1rem;
   }
 }
