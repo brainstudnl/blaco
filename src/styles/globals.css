@@ -41,3 +41,9 @@ a.active::before {
 label {
   font-weight: 700;
 }
+
+p,
+ul {
+  line-height: 1.6rem;
+  margin: 0;
+}

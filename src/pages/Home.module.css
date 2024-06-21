@@ -8,7 +8,6 @@
 .levels {
   display: grid;
   margin-bottom: 2rem;
-  max-width: 400px;
   margin: 0 auto 2rem auto;
   width: 100%;
   gap: 1.6rem;
