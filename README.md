@@ -33,4 +33,5 @@ $ bun dev
 Open http://localhost:3000 with your browser to see the result.
 
 ## Contributing
+
 Contibutions are welcome! If you want to add a cool feature or do some kind of improvement, feel free to open an [issue](https://github.com/brainstudnl/blaco/issues/new/choose) or [pull request](https://github.com/brainstudnl/blaco/compare)!

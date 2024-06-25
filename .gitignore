@@ -40,7 +40,7 @@ next-env.d.ts
 .vscode
 
 public/images/users
-!public/images/users/Unnamed.jpg
+!public/images/users/unnamed.jpg
 
 # These are generated on build-time
 sw*
