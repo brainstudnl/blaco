@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link
           id="theme-link"
           rel="stylesheet"
