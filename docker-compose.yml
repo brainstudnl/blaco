@@ -30,7 +30,7 @@ services:
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
     expose:
-      - ${MYSQL_PORT}  
+      - ${MYSQL_PORT}
     environment:
       MYSQL_DB: ${MYSQL_DB}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -41,7 +41,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
       timeout: 20s
       retries: 10
 volumes:
