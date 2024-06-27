@@ -1,0 +1,49 @@
+services:
+  web:
+    container_name: blaco
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    # Set envrionment variables based on the .env file
+    env_file:
+      - .env.docker
+    # Set environment variables directly in the docker-compose file
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DB: blaco
+      MYSQL_DATABASE: blaco
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+      MYSQL_PORT: 3306
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    # volumes:
+    #   - .:/app
+    restart: always
+    ports:
+      - 3000:3000
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    expose:
+      - ${MYSQL_PORT}  
+    environment:
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_TCP_PORT: ${MYSQL_PORT}
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+volumes:
+  db:
+    driver: local
