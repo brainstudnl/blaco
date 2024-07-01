@@ -26,7 +26,7 @@ export function UserAvatar({
   children,
 }: PropsWithChildren<IProps>) {
   const url = getAvatarUrl(name);
-  const fallback = getAvatarUrl('Unnamed');
+  const fallback = getAvatarUrl('unnamed');
   const [src, setSrc] = useState(url);
   const width = SIZES[size];
   const height = SIZES[size];
