@@ -41,3 +41,5 @@ next-env.d.ts
 
 public/images/users
 !public/images/users/unnamed.jpeg
+
+src/cli/data
