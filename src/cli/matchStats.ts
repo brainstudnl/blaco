@@ -4,7 +4,6 @@ type MatchStats = {
   matchesPlayed: Map<number, number>;
   matchesLost: Map<number, number>;
   matchDays: Set<string>;
-  largestResult: number;
   largestMatchResult: Array<LargestMatchResult> | null;
 };
 
@@ -83,7 +82,6 @@ export function calculateMatchStats(matches: Array<Match>): MatchStats {
     matchesPlayed,
     matchesLost,
     matchDays,
-    largestResult,
     largestMatchResult,
   };
 }

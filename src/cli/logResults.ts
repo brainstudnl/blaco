@@ -1,4 +1,5 @@
 import { Match, User } from '@prisma/client';
+import Table from 'cli-table3';
 import { calculateBestAndWorstGoalDifference } from './bestWorstGoalDifference';
 import { getHumanReadableDate } from './getHumanReadableDate';
 import { calculateMatchStats } from './matchStats';
@@ -41,59 +42,47 @@ export function logResults({
   const userLookup = new Map<number, string>();
   users.forEach((user) => userLookup.set(user.id, user.name));
 
-  console.log(`Number of matches played: ${matches.length}`);
+  const statistics = new Table({ head: ['Description', 'User'] });
 
-  const {
-    matchDays,
-    matchesPlayed,
-    matchesLost,
-    largestMatchResult,
-    largestResult,
-  } = calculateMatchStats(matches);
-  console.log(`Number of match days: ${matchDays.size}`);
+  statistics.push(['Number of matches played', matches.length]);
+
+  const { matchDays, matchesPlayed, matchesLost, largestMatchResult } =
+    calculateMatchStats(matches);
+
+  statistics.push([`Number of match days`, matchDays.size]);
 
   const { worstUserId, worstGoalDifference, bestUserId, bestGoalDifference } =
     calculateBestAndWorstGoalDifference(goalsScored, goalsConceded);
-  console.log(
-    `Worst goal difference: ${getUserName(worstUserId, userLookup)} with goal difference ${worstGoalDifference}`,
-  );
+
+  statistics.push([
+    `Worst goal difference`,
+    `${getUserName(worstUserId, userLookup)} with goal difference ${worstGoalDifference}`,
+  ]);
 
   const [mostMatchesPlayedId, mostMatchesPlayedCount] =
     getEntryWithMostStatistics(matchesPlayed);
   const [mostMatchesLostId, mostMatchesLostCount] =
     getEntryWithMostStatistics(matchesLost);
 
-  console.log(
-    `User with most matches played: ${userLookup.get(mostMatchesPlayedId)} with ${mostMatchesPlayedCount} matches`,
-  );
-  console.log(
-    `User with most matches lost: ${userLookup.get(mostMatchesLostId)} with ${mostMatchesLostCount} losses`,
-  );
+  statistics.push([
+    `User with most matches played`,
+    `${userLookup.get(mostMatchesPlayedId)} with ${mostMatchesPlayedCount} matches`,
+  ]);
 
-  console.log(`Number of active players: ${matchesPlayed.size}`);
+  statistics.push([
+    `User with most matches lost`,
+    `${userLookup.get(mostMatchesLostId)} with ${mostMatchesLostCount} losses`,
+  ]);
+
+  statistics.push([`Number of active players`, matchesPlayed.size]);
 
   const mostFrequentMatchup = calculateMostFrequentMatchup(matches);
   if (mostFrequentMatchup.matchup) {
     const [user1, user2] = mostFrequentMatchup.matchup;
-    console.log(
-      `Archrivals: ${userLookup.get(user1)} vs ${userLookup.get(user2)} with ${mostFrequentMatchup.count} matches`,
-    );
-  } else {
-    console.log(`No frequent matchups found.`);
-  }
-
-  // const largestMatchResult = calculateMostGoalsAgainst(goalsConceded);
-
-  if (largestMatchResult) {
-    console.log(
-      `Largest result difference: ${largestResult} goals on the following match days:`,
-    );
-
-    largestMatchResult.forEach((match) => {
-      console.log(
-        `\t${getHumanReadableDate(match.date)}: ${userLookup.get(match.challenger)} ${match.challengerGoals} - ${match.defenderGoals} ${userLookup.get(match.defender)}`,
-      );
-    });
+    statistics.push([
+      `Archrivals`,
+      `${userLookup.get(user1)} vs ${userLookup.get(user2)} with ${mostFrequentMatchup.count} matches`,
+    ]);
   }
 
   const king = getUserName(
@@ -101,21 +90,46 @@ export function logResults({
     userLookup,
   );
 
-  console.log(`King of BLACO: ${king}`);
+  statistics.push([`King of BLACO`, king]);
 
-  console.log(
-    `Best goal difference: ${getUserName(bestUserId, userLookup)} with goal difference ${bestGoalDifference}`,
-  );
+  statistics.push([
+    `Best goal difference`,
+    `${getUserName(bestUserId, userLookup)} with goal difference ${bestGoalDifference}`,
+  ]);
 
   const { mostGoalsAgainst, mostGoalsAgainstUser } =
     calculateMostGoalsAgainst(goalsConceded);
 
-  console.log(
-    `User with most goals conceded: ${getUserName(mostGoalsAgainstUser, userLookup)} with ${mostGoalsAgainst} goals against`,
-  );
+  statistics.push([
+    `User with most goals conceded`,
+    `${getUserName(mostGoalsAgainstUser, userLookup)} with ${mostGoalsAgainst} goals against`,
+  ]);
 
-  console.log(`Matches per match day:`);
-  calculateMatchesPerMatchDay(matches).forEach((count, date) => {
-    console.log(`\t${date}: ${count}`);
+  console.log(statistics.toString());
+
+  if (largestMatchResult) {
+    const matchesTable = new Table({
+      head: ['Date', 'Largest result difference'],
+    });
+
+    largestMatchResult.forEach((match) => {
+      matchesTable.push([
+        `${getHumanReadableDate(match.date)}`,
+        `${userLookup.get(match.challenger)} ${match.challengerGoals} - ${match.defenderGoals} ${userLookup.get(match.defender)}`,
+      ]);
+    });
+
+    console.log(matchesTable.toString());
+  }
+
+  // Display the number of matches played per match day
+  const matchesPerMatchDayTable = new Table({
+    head: ['Date', 'Number of matches'],
   });
+
+  calculateMatchesPerMatchDay(matches).forEach((count, date) => {
+    matchesPerMatchDayTable.push([getHumanReadableDate(date), count]);
+  });
+
+  console.log(matchesPerMatchDayTable.toString());
 }
