@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    # Set envrionment variables based on the .env file
     env_file:
       - .env
     environment:
@@ -12,19 +11,16 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    # volumes:
-    #   - .:/app
-    restart: always
+    restart: on_failure
     ports:
       - 3000:3000
   db:
     image: mysql:latest
-    restart: always
+    restart: on_failure
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
     expose:
       - ${MYSQL_PORT}
-    # Set envrionment variables based on the .env file
     env_file:
       - .env
     environment:

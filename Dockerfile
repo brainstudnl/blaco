@@ -9,10 +9,6 @@ RUN bun install
 
 COPY . .
 
-# COPY ./public ./
-
-
-
 # Copy wait-for-it script
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
@@ -28,5 +24,4 @@ CMD ["sh", "-c", "\
     && bunx prisma generate \
     && bun run build \
     && bun run start \
-    # && bun run dev \
 "]
