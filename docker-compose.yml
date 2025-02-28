@@ -11,12 +11,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    restart: on_failure
+    restart: always
     ports:
       - 3000:3000
   db:
     image: mysql:latest
-    restart: on_failure
+    restart: always
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
     expose:
