@@ -1,11 +1,11 @@
+import { UserAvatar } from '@blaco/components/UserAvatar';
+import { getUrl } from '@blaco/utils/getUrl';
 import { Match, User } from '@prisma/client';
 import classNames from 'classnames/bind';
 import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Fragment } from 'react';
-import { UserAvatar } from '@blaco/components/UserAvatar';
-import { getUrl } from '@blaco/utils/getUrl';
 import styles from './MatchPage.module.css';
 
 const cx = classNames.bind(styles);

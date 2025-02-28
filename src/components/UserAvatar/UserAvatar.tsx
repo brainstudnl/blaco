@@ -1,7 +1,7 @@
+import { getAvatarUrl } from '@blaco/utils/getAvatarUrl';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { PropsWithChildren, useState } from 'react';
-import { getAvatarUrl } from '@blaco/utils/getAvatarUrl';
 import styles from './UserAvatar.module.css';
 
 const cx = classNames.bind(styles);

@@ -23,7 +23,7 @@ a::after {
 }
 
 a::before {
-  content: '';
+  content: "";
 }
 
 a::before {

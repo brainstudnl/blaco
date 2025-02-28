@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { getMatches } from '@blaco/database/MatchRepository';
 import { createMatch } from '@blaco/services/MatchService';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,

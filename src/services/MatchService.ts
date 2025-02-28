@@ -1,6 +1,6 @@
-import { Match, User } from '@prisma/client';
 import { insertMatch } from '@blaco/database/MatchRepository';
 import { getUser, updateUser } from '@blaco/database/UserRepository';
+import { Match, User } from '@prisma/client';
 
 export async function createMatch(
   challenger_id: number,

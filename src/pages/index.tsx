@@ -1,9 +1,9 @@
+import { Level } from '@blaco/components/Level';
+import { getUrl } from '@blaco/utils/getUrl';
 import { User } from '@prisma/client';
 import classNames from 'classnames/bind';
 import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-import { Level } from '@blaco/components/Level';
-import { getUrl } from '@blaco/utils/getUrl';
 import styles from './Home.module.css';
 
 const cx = classNames.bind(styles);
