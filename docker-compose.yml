@@ -1,0 +1,39 @@
+services:
+  web:
+    container_name: blaco
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:${MYSQL_PORT}/${MYSQL_DATABASE}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on_failure
+    ports:
+      - 3000:3000
+  db:
+    image: mysql:latest
+    restart: on_failure
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    expose:
+      - ${MYSQL_PORT}
+    env_file:
+      - .env
+    environment:
+      MYSQL_DB: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_TCP_PORT: ${MYSQL_PORT}
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      timeout: 20s
+      retries: 10
+volumes:
+  db:
+    driver: local
