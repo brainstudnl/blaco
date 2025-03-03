@@ -14,20 +14,115 @@ datasource db {
 }
 
 model User {
-  id                 Int     @id @default(autoincrement())
-  name               String  @db.VarChar(255)
-  level              Int
-  challenger_matches Match[] @relation("challenger")
-  defender_matches   Match[] @relation("defender")
+  id         Int             @id @default(autoincrement())
+  name       String          @db.VarChar(255)
+  game_stats UserGameStats[]
+  teams      TeamMember[]
+}
+
+model Game {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique @db.VarChar(255)
+  matches       Match[]
+  seasons       Season[]
+  teams         Team[]
+  rules         Rules?
+  user_stats    UserGameStats[]
+  created_at    DateTime        @default(now()) @db.DateTime(3)
+  updated_at    DateTime        @updatedAt @db.DateTime(3)
+  deleted_at    DateTime?       @db.DateTime(3)
+  min_team_size Int
+  max_team_size Int
+
+  @@index([name])
+}
+
+model UserGameStats {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  user       User      @relation(fields: [user_id], references: [id])
+  game_id    Int
+  game       Game      @relation(fields: [game_id], references: [id])
+  level      Int
+  created_at DateTime  @db.DateTime(3)
+  updated_at DateTime  @updatedAt @db.DateTime(3)
+  deleted_at DateTime? @db.DateTime(3)
 }
 
 model Match {
-  id               Int      @id @default(autoincrement())
-  challenger       User     @relation("challenger", fields: [challenger_id], references: [id])
-  defender         User     @relation("defender", fields: [defender_id], references: [id])
+  id               Int       @id @default(autoincrement())
+  game_id          Int
+  game             Game      @relation(fields: [game_id], references: [id])
   challenger_id    Int
+  challenger       Team      @relation("challenger", fields: [challenger_id], references: [id])
   defender_id      Int
+  defender         Team      @relation("defender", fields: [defender_id], references: [id])
   score_challenger Int
   score_defender   Int
-  played_at        DateTime
+  played_at        DateTime  @default(now())
+  updated_at       DateTime  @updatedAt @db.DateTime(3)
+  deleted_at       DateTime? @db.DateTime(3)
+
+  @@index([game_id])
+  @@index([challenger_id])
+  @@index([defender_id])
+}
+
+model Team {
+  id                    Int          @id @default(autoincrement())
+  name                  String       @db.VarChar(255)
+  members               TeamMember[]
+  matches_as_challenger Match[]      @relation("challenger")
+  matches_as_defender   Match[]      @relation("defender")
+  game_id               Int
+  game                  Game         @relation(fields: [game_id], references: [id])
+  created_at            DateTime     @default(now()) @db.DateTime(3)
+  updated_at            DateTime     @updatedAt @db.DateTime(3)
+  deleted_at            DateTime?    @db.DateTime(3)
+
+  @@index([name])
+  @@index([game_id])
+}
+
+model TeamMember {
+  id         Int       @id @default(autoincrement())
+  team_id    Int
+  team       Team      @relation(fields: [team_id], references: [id])
+  user_id    Int
+  user       User      @relation(fields: [user_id], references: [id])
+  created_at DateTime  @default(now()) @db.DateTime(3)
+  updated_at DateTime  @updatedAt @db.DateTime(3)
+  deleted_at DateTime? @db.DateTime(3)
+
+  @@unique([team_id, user_id])
+  @@index([team_id])
+  @@index([user_id])
+}
+
+model Rules {
+  id         Int       @id @default(autoincrement())
+  game_id    Int
+  game       Game      @relation(fields: [game_id], references: [id])
+  path       String    @db.VarChar(255)
+  created_at DateTime  @default(now()) @db.DateTime(3)
+  updated_at DateTime  @updatedAt @db.DateTime(3)
+  deleted_at DateTime? @db.DateTime(3)
+
+  @@unique([game_id])
+  @@index([game_id])
+}
+
+model Season {
+  id         Int       @id @default(autoincrement())
+  name       String
+  game_id    Int
+  game       Game      @relation(fields: [game_id], references: [id])
+  start_date DateTime  @default(now()) @db.DateTime(3)
+  end_date   DateTime? @db.DateTime(3)
+  active     Boolean   @default(true)
+  deleted_at DateTime? @db.DateTime(3)
+  created_at DateTime  @default(now()) @db.DateTime(3)
+  updated_at DateTime  @updatedAt @db.DateTime(3)
+
+  @@index([game_id])
 }
