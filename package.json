@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier:check": "prettier --check ."
+    "prettier:check": "prettier --check .",
+    "seed": "bun run prisma/seeds/main.ts"
+  },
+  "prisma": {
+    "seed": "bun seed"
   },
   "dependencies": {
     "@mdx-js/react": "3.0.1",
